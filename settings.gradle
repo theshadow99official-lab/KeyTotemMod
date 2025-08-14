@@ -1,3 +1,58 @@
+<<<<<<< HEAD
+pluginManagement {
+    repositories {
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}```
+
+#### 4. `.github/workflows/build.yml`
+
+This file tells GitHub how to build the project. It uses a specific, compatible Gradle version.
+
+**File Path:** `.github/workflows/build.yml`
+**Content:**
+```yaml
+name: Build KeyTotem Mod
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      # Use a stable Gradle version that is compatible with our stable Loom version
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.7'
+
+      - name: Build with Gradle
+        run: gradle build --stacktrace
+        
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: KeyTotem-1.21.5-Build
+          path: build/libs/!(*-dev|*-sources).jar
+=======
 pluginManagement {
     repositories {
         // This is the line that tells Gradle where to find Fabric's tools
@@ -10,3 +65,4 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+>>>>>>> 49be0437b38ee2e70d6879b6627ccde5fc635d30
