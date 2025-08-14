@@ -1,4 +1,4 @@
-name: Build KeyTotem Mod
+name: Build KeyTotem Mod (Robust)
 
 on:
   push:
@@ -21,18 +21,15 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      # Step 3: THE FINAL FIX - Convert line endings and set permissions.
-      # This block makes the workflow completely robust.
-      - name: Fix gradlew script
-        run: |
-          # This command strips the invisible Windows carriage returns (\r)
-          sed -i 's/\r$//' ./gradlew
-          # This command ensures the script is executable
-          chmod +x ./gradlew
+      # Step 3: THE FINAL FIX - Set up Gradle using a clean, official source.
+      # This step completely bypasses your local gradlew script, solving the problem.
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
 
-      # Step 4: Run the Gradle build command. This will now finally succeed.
+      # Step 4: Run the Gradle build command.
+      # Notice we are now just calling 'gradle' instead of './gradlew'.
       - name: Build with Gradle
-        run: ./gradlew build --stacktrace
+        run: gradle build --stacktrace
         
       # Step 5: Upload the compiled .jar file as a build artifact.
       - name: Upload Artifact
