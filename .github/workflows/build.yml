@@ -1,4 +1,4 @@
-name: Build KeyTotem Mod (Robust)
+name: Build KeyTotem Mod
 
 on:
   push:
@@ -21,13 +21,14 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      # Step 3: THE FINAL FIX - Set up Gradle using a clean, official source.
-      # This step completely bypasses your local gradlew script, solving the problem.
+      # Step 3: THE FINAL FIX - Set up a specific, compatible version of Gradle.
+      # This forces the runner to use Gradle 8.7, which works with Fabric Loom.
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.7'
 
       # Step 4: Run the Gradle build command.
-      # Notice we are now just calling 'gradle' instead of './gradlew'.
       - name: Build with Gradle
         run: gradle build --stacktrace
         
