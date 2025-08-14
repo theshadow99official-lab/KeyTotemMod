@@ -1,0 +1,12 @@
+pluginManagement {
+    repositories {
+        // This is the line that tells Gradle where to find Fabric's tools
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        
+        // This is the standard Gradle repository
+        gradlePluginPortal()
+    }
+}
