@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "keytotem",
+  "version": "${version}",
+  "name": "KeyTotem",
+  "description": "Equip a totem from your inventory with the press of a key.",
+  "authors": [
+    "Shadow"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/keytotem/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.shadow.keytotem.client.KeyTotemClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "fabric-api": "*",
+    "minecraft": "1.21.5"
+  }
+}
